@@ -32,8 +32,7 @@ nav ul li {
 	justify-content: center;
 	align-items: flex-start;
 	margin-top: 20px;
-	gap: 20px;
-	min-height: 83vh;
+	gap: 40px;
 	flex-wrap: wrap;
 }
 
@@ -96,6 +95,8 @@ button:active {
 	gap: 0px;
 	min-width: 100%;
 	background-color: rgb(151, 151, 214);
+	margin: 0;
+	height: fit-content;
 }
 
 .tx-status p {
@@ -108,7 +109,7 @@ button:active {
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
-	max-width: 90%;
+	max-width: 250px;
 	text-wrap: wrap;
 	word-break: break-all;
 	box-shadow: 2px 2px 5px 0 navy;
@@ -118,4 +119,72 @@ button:active {
 	font-size: 17px !important;
 	padding: 5px 10px !important;
 	margin-bottom: 10px;
+}
+
+.user-details {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 10px;
+	max-width: 250px;
+	margin-bottom: 30px;
+}
+
+.user-details h3 {
+	color: navy;
+	margin: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.user-details p {
+	background-color: white;
+	min-width: 100%;
+	min-height: 30px;
+	max-height: 100px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 5px 15px;
+	max-width: 100%;
+	text-wrap: nowrap;
+	box-shadow: 2px 2px 5px 0 navy;
+	overflow-x: auto;
+	margin: 0;
+
+	&::-webkit-scrollbar {
+		width: 10px;
+		height: 5px;
+		display: none;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: transparent;
+		border-radius: 10px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+		max-width: 90%;
+	}
+}
+
+.user-details input {
+	background-color: white;
+	min-width: 100%;
+	min-height: 30px;
+	max-height: 100px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 5px 10px;
+	max-width: 100%;
+	text-wrap: wrap;
+	box-shadow: 2px 2px 5px 0 navy;
+	overflow-x: auto;
+	margin: 0;
+	border: none;
 }

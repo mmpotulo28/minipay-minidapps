@@ -1,17 +1,33 @@
 import { utils } from 'ethers';
+import { Chain, createPublicClient, http } from 'viem';
+import { celo } from 'viem/chains';
 
 // Mainnet address of cUSD
 const CUSD_ADDRESS = '0x765DE816845861e75A25fCA122bb6898B8B1282a';
-
-const receiverAddress = '0x0717329C677ab484EAA73F4C8EEd92A2FA948746';
+let receiverAddress = '0x0717329C677ab484EAA73F4C8EEd92A2FA948746';
 
 // DApp to quickly test transfer of cUSD to a specific address using the cUSD contract.
 export default function TransferCUSD() {
+	const publicClient = createPublicClient({
+		chain: celo as ChainFormatters,
+		transport: http(),
+	});
+
+	async function checkIfTransactionSucceeded(publicClient: any, transactionHash: string) {
+		let receipt = await publicClient.getTransactionReceipt({
+			hash: transactionHash,
+		});
+
+		return receipt.status === 'success';
+	}
+
 	async function transferCUSD() {
 		console.log('Transfer cUSD');
 
 		if (window.ethereum) {
 			let statusText = document.querySelector('.status-text');
+			const toAddress = document.getElementById('to-address') as HTMLInputElement;
+			receiverAddress = toAddress.value || '0x0717329C677ab484EAA73F4C8EEd92A2FA948746';
 			let accounts = await window.ethereum.request({
 				method: 'eth_requestAccounts',
 			});
@@ -21,11 +37,7 @@ export default function TransferCUSD() {
 			statusText!.textContent = 'Connected account: ' + userAddress;
 
 			let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
-
-			let calldata = iface.encodeFunctionData('transfer', [
-				receiverAddress,
-				utils.parseEther('0.1'), // 10 cUSD - This amount is in wei
-			]);
+			let calldata = iface.encodeFunctionData('transfer', [receiverAddress, utils.parseUnits('1', 2)]);
 
 			try {
 				statusText!.textContent = 'Sending transaction...';
@@ -40,25 +52,17 @@ export default function TransferCUSD() {
 					],
 				});
 
-				// wait for	the transaction to be received by the network do not use tx.await()
-				// wait for the transaction to be received by the network do not use tx.await()
 				await new Promise((resolve) => setTimeout(resolve, 4000));
-
 				statusText!.textContent = 'waiting confirmation...';
 				console.log('Transaction hash: ' + tx);
 
 				// confirm transaction
-				let receipt = await window.ethereum.request({
-					method: 'eth_getTransactionReceipt',
-					params: [tx],
-				});
-
-				console.log('Transaction receipt: ' + receipt);
+				let transactionStatus = await checkIfTransactionSucceeded(publicClient, tx);
 
 				// Check if the transaction was successful
-				if (receipt && receipt.status === '0x1') {
-					statusText!.textContent = 'Transaction successful' + tx;
-					console.log('Transaction successful', receipt);
+				if (transactionStatus) {
+					statusText!.textContent = 'Transaction successful: ' + tx;
+					console.log('Transaction successful', tx);
 				} else {
 					statusText!.textContent = 'Transaction failed!' + tx;
 					console.error('Transaction failed', JSON.stringify(tx, null, 2));
