@@ -29,8 +29,9 @@ nav ul li {
 
 .dApps {
 	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 	margin-top: 20px;
 	gap: 40px;
 	flex-wrap: wrap;
@@ -89,21 +90,23 @@ button:active {
 
 .tx-status {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
 	gap: 0px;
 	min-width: 100%;
-	background-color: rgb(151, 151, 214);
+	background-color: rgba(151, 151, 214, 0.336);
 	margin: 0;
 	height: fit-content;
+	margin-bottom: 100px;
+	min-width: 97vw;
 }
 
 .tx-status p {
-	background-color: white;
+	background-color: black;
 	min-width: 90%;
 	min-height: 40px;
-	max-height: 100px;
+	max-height: 250px;
 	border-radius: 10px;
 	display: flex;
 	justify-content: center;
@@ -113,12 +116,56 @@ button:active {
 	text-wrap: wrap;
 	word-break: break-all;
 	box-shadow: 2px 2px 5px 0 navy;
+	color: white;
 }
 
 .tx-status button {
 	font-size: 17px !important;
 	padding: 5px 10px !important;
 	margin-bottom: 10px;
+}
+
+.tx-status table {
+	width: 90%;
+	margin: 20px auto;
+	background-color: white;
+	border-radius: 10px;
+	background-color: navy;
+	color: white;
+	transition: all ease-in-out 0.5s;
+	max-width: 90%;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: white;
+		border-radius: 10px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: navy;
+		max-width: 90%;
+	}
+}
+
+.tx-status table th {
+	background-color: navy;
+	color: white;
+	padding: 0px;
+}
+
+.tx-status table td {
+	padding: 3px;
+	text-wrap: wrap;
+	word-break: break-all;
+}
+
+.tx-status table tr:hover {
+	background-color: rgba(255, 255, 255, 0.26);
 }
 
 .user-details {

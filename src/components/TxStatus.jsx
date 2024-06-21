@@ -10,7 +10,9 @@ const TxStatus = () => {
 	return (
 		<div className="tx-status">
 			<p className="status-text"></p>
-			<button onClick={clearStatus}>Clear</button>
+			<button className="status-button" onClick={clearStatus}>
+				Clear
+			</button>
 		</div>
 	);
 };
