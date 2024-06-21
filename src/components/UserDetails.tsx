@@ -11,20 +11,19 @@ const UserDetails = () => {
 	useEffect(() => {
 		async function getUserDetails() {
 			if (window.ethereum) {
-				let accounts = await window.ethereum.request({
-					method: 'eth_requestAccounts',
-				});
-
-				// The current selected account out of the connected accounts.
-				let userAddress = accounts[0];
-				setUserAddress(userAddress);
-
 				try {
+					let accounts = await window.ethereum.request({
+						method: 'eth_requestAccounts',
+					});
+
+					let address = accounts[0];
+
 					let balance = await window.ethereum.request({
 						method: 'eth_getBalance',
-						params: [userAddress, 'latest'],
+						params: [address, 'latest'],
 					});
 					let formattedBalance = utils.formatEther(balance);
+					setUserAddress(address);
 					setUserBalance(formattedBalance);
 				} catch (error: string | any) {
 					alert('Error getting balance: ' + error.message);

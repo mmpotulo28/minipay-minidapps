@@ -1,5 +1,5 @@
 import { utils } from 'ethers';
-import { Chain, createPublicClient, http } from 'viem';
+import { createPublicClient, http } from 'viem';
 import { celo } from 'viem/chains';
 
 // Mainnet address of cUSD
@@ -9,7 +9,7 @@ let receiverAddress = '0x0717329C677ab484EAA73F4C8EEd92A2FA948746';
 // DApp to quickly test transfer of cUSD to a specific address using the cUSD contract.
 export default function TransferCUSD() {
 	const publicClient = createPublicClient({
-		chain: celo as ChainFormatters,
+		chain: celo,
 		transport: http(),
 	});
 
