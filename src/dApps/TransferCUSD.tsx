@@ -110,15 +110,12 @@ export default function TransferCUSD() {
 			toAddress.value = receiverAddress;
 
 			let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
-			let calldata = iface.encodeFunctionData('transfer', [
-				receiverAddress,
-				ethers.utils.parseUnits(amountValue, 18),
-			]);
+			let calldata = iface.encodeFunctionData('transfer', [receiverAddress, utils.parseEther('1')]);
 
 			let gasLimit = await estimateGas(publicClient, {
 				account: address,
 				to: receiverAddress,
-				data: calldata,
+				value: utils.parseUnits(amountValue, 15).toString(),
 			});
 			let gasPrice = await estimateGasPrice(publicClient);
 
@@ -130,8 +127,8 @@ export default function TransferCUSD() {
 					params: [
 						{
 							from: address,
-							to: receiverAddress, // We need to call the transfer function on the cUSD token contract
-							data: calldata,
+							to: receiverAddress,
+							value: utils.parseUnits(amountValue, 15).toString(),
 							gas: gasLimit.toString(),
 							gasPrice: gasPrice.toString(),
 						},
