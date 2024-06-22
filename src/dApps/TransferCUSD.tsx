@@ -72,7 +72,7 @@ export default function TransferCUSD() {
 				// get cUSD balance
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				const contract = new ethers.Contract(
-					'0x874069fa1eb16d44d622f2e0ca25eea172369bc1',
+					'0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9',
 					[
 						'function balanceOf(address) view returns (uint)',
 						'function decimals() view returns (uint8)',
