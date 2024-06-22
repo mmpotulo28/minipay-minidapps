@@ -110,7 +110,7 @@ export default function TransferCUSD() {
 			toAddress.value = receiverAddress;
 
 			let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
-			let calldata = iface.encodeFunctionData('transfer', [receiverAddress, utils.parseEther('1')]);
+			// let calldata = iface.encodeFunctionData('transfer', [receiverAddress, utils.parseEther('1')]);
 
 			let gasLimit = await estimateGas(publicClient, {
 				account: address,
