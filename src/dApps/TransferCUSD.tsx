@@ -109,13 +109,17 @@ export default function TransferCUSD() {
 			const amountValue = amount.value || '0.1';
 			toAddress.value = receiverAddress;
 
-			// let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
-			// let calldata = iface.encodeFunctionData('transfer', [receiverAddress, utils.parseEther('1')]);
+			let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
+			let calldata = iface.encodeFunctionData('transfer', [
+				receiverAddress,
+				utils.parseUnits(amountValue, 15).toString(),
+			]);
 
 			let gasLimit = await estimateGas(publicClient, {
 				account: address,
 				to: receiverAddress,
 				value: utils.parseUnits(amountValue, 15).toString(),
+				data: calldata,
 			});
 			let gasPrice = await estimateGasPrice(publicClient);
 
@@ -129,6 +133,7 @@ export default function TransferCUSD() {
 							from: address,
 							to: receiverAddress,
 							value: utils.parseUnits(amountValue, 15).toString(),
+							data: calldata,
 							gas: gasLimit.toString(),
 							gasPrice: gasPrice.toString(),
 						},
