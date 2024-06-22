@@ -2,8 +2,6 @@ import { ethers, utils } from 'ethers';
 import { createPublicClient, http } from 'viem';
 import { celoAlfajores } from 'viem/chains';
 
-// Mainnet address of cUSD
-const CUSD_ADDRESS = '0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1';
 const Alfajores_ADDRESS = '0x874069fa1eb16d44d622f2e0ca25eea172369bc1';
 let receiverAddress = '0x28323adb899EE5ea8E4C3C24DFe3E38E1117C559';
 
