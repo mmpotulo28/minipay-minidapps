@@ -1,6 +1,5 @@
 import MiniDApps from './dApps/MiniDApps';
 import Navbar from './components/Navbar';
-// add css
 import './App.css';
 import { Footer } from './components/Footer';
 
