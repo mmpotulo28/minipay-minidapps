@@ -85,7 +85,7 @@ export default function TransferCUSD() {
 				const formattedBalance = ethers.utils.formatUnits(balance, decimals);
 
 				const balanceText = document.querySelector('.balance');
-				balanceText!.textContent = 'Balance: ' + parseFloat(formattedBalance).toFixed(7) + '';
+				balanceText!.textContent = 'Balance: ' + parseFloat(formattedBalance).toFixed(7) + ' cUSD';
 			} catch (error: string | any) {
 				statusText!.textContent = 'Error getting balance: ' + error.message;
 			}
@@ -112,7 +112,7 @@ export default function TransferCUSD() {
 			let iface = new utils.Interface(['function transfer(address to, uint256 value)']);
 			let calldata = iface.encodeFunctionData('transfer', [
 				receiverAddress,
-				utils.parseEther(amountValue.toString()), // Transfer in cUSD
+				ethers.utils.parseUnits(amountValue, 18),
 			]);
 
 			let gasLimit = await estimateGas(publicClient, {
